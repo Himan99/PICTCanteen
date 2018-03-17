@@ -5,7 +5,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -36,8 +38,14 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuItemViewHo
     }
 
     @Override
-    public void onBindViewHolder(MenuItemViewHolder holder, int position) {
+    public void onBindViewHolder(final MenuItemViewHolder holder, int position) {
         holder.bind(position);
+        holder.mAddToCart_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(view.getContext(),"Added To Cart",Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override
@@ -47,9 +55,11 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuItemViewHo
 
     class MenuItemViewHolder extends RecyclerView.ViewHolder{
     TextView tv;
+    Button mAddToCart_btn;
         public MenuItemViewHolder(View itemView) {
             super(itemView);
             tv= itemView.findViewById(R.id.tv_menu_item_name);
+            mAddToCart_btn=itemView.findViewById(R.id.btn_AddToCart);
         }
         public void bind(int position)  {
             tv.setText(Names.get(position));
