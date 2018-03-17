@@ -11,25 +11,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/navigation"
-        android:animateLayoutChanges="true">
+        android:animateLayoutChanges="true"
+        android:fitsSystemWindows="true"
+        android:backgroundTint="@color/colorPrimaryDark">
+
 
     </FrameLayout>
-
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/colorPrimary"
-        app:itemIconTint="@color/colorPrimary"
+        android:paddingBottom="16dp"
+        android:textAlignment="center"
+        app:itemIconTint="@color/colorAccent"
         app:itemTextColor="@color/colorPrimaryDark"
+        app:elevation="4dp"
         app:menu="@menu/bottom_nav_menu"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:textSize="20sp"/>
+
 
 </RelativeLayout>
