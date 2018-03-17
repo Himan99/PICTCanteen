@@ -9,6 +9,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 /**
@@ -38,12 +44,24 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuItemViewHo
     }
 
     @Override
-    public void onBindViewHolder(final MenuItemViewHolder holder, int position) {
+    public void onBindViewHolder(final MenuItemViewHolder holder, final int position) {
         holder.bind(position);
         holder.mAddToCart_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(view.getContext(),"Added To Cart",Toast.LENGTH_LONG).show();
+                DatabaseReference mDataRef;
+                mDataRef= FirebaseDatabase.getInstance().getReference("Orders");
+//                mDataRef.child(Names.get(position)).addListenerForSingleValueEvent(new Va);
+//
+//                    @Override
+//                    public void onCancelled(DatabaseError databaseError) {
+//
+//                    }
+//                });
+                String id = mDataRef.push().getKey();
+                Order order=new Order(Names.get(position),1);
+                mDataRef.child(id).setValue(order);
             }
         });
     }
