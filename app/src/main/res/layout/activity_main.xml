@@ -6,13 +6,12 @@
     android:layout_height="match_parent"
     tools:context="com.example.himanshupalve.pictcanteen.MainActivity"
     android:fitsSystemWindows="true">
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rv_menu">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:textSize="20sp"/>
+    </android.support.v7.widget.RecyclerView>
+
 
 </RelativeLayout>

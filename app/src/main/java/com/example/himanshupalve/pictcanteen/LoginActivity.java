@@ -37,10 +37,11 @@ public class LoginActivity extends AppCompatActivity {
         signupLink=findViewById(R.id.link_signup);
         mEmaileText=findViewById(R.id.email);
         mPasswordeText=findViewById(R.id.password);
-
-        mEmaileText.setText(sharedPreferences.getString("Email",""));
-        mPasswordeText.setText(sharedPreferences.getString("Password",""));
-
+        String s=" ";
+        mEmaileText.setText(sharedPreferences.getString("Email"," "));
+        mPasswordeText.setText(sharedPreferences.getString("Password"," "));
+//        if(mEmaileText.getText().toString()!=s&&mPasswordeText.getText().toString()!=s)
+//            finish();
         signupLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
