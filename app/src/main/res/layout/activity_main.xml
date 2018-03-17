@@ -6,7 +6,24 @@
     android:layout_height="match_parent"
     tools:context="com.example.himanshupalve.pictcanteen.MainActivity"
     android:fitsSystemWindows="true">
+    <FrameLayout
+        android:id="@+id/frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/navigation"
+        android:animateLayoutChanges="true">
 
+    </FrameLayout>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        app:itemIconTint="@color/colorPrimary"
+        app:itemTextColor="@color/colorPrimaryDark"
+        app:menu="@menu/bottom_nav_menu"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
