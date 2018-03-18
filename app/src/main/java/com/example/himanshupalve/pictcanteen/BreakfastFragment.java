@@ -19,6 +19,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import static android.preference.PreferenceManager.getDefaultSharedPreferences;
+
 
 public class BreakfastFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -61,7 +63,8 @@ public class BreakfastFragment extends Fragment {
         // Inflate the layout for this fragment
         View RootView=inflater.inflate(R.layout.fragment_breakfast, container, false);
         mMenu= RootView.findViewById(R.id.rv_menu);
-        Names=getNames();
+        if(Names==null)
+            Names=getNames();
         layoutManager=new LinearLayoutManager(this.getActivity());
         mMenu.setLayoutManager(layoutManager);
         mMenu.setHasFixedSize(true);
@@ -72,6 +75,8 @@ public class BreakfastFragment extends Fragment {
 
     private ArrayList<String> getNames( )
     {
+//        SharedPreferences sharedPreferences=getDefaultSharedPreferences(this.getActivity());
+//        SharedPreferences.Editor editor=sharedPreferences.edit();
         ArrayList<String> mArrayList=new ArrayList<>();
         AssetManager assetManager=this.getActivity().getAssets();
         try {
@@ -80,8 +85,7 @@ public class BreakfastFragment extends Fragment {
             String line = null;
             while((line = in.readLine()) != null) {
                 String word = line.trim();
-//                SharedPreferences.Editor editor=sharedPreferences.edit();
-//                editor.putString(word,"0");
+//                editor.putInt(word,0);
 //                editor.apply();
                 mArrayList.add(word);
             }
@@ -89,6 +93,8 @@ public class BreakfastFragment extends Fragment {
             e.printStackTrace();
             Toast.makeText(this.getActivity(),"Could not load menu",Toast.LENGTH_LONG).show();
         }
+//        editor.putInt("CartSize",0);
+//        editor.apply();
         return mArrayList;
     }
     // TODO: Rename method, update argument and hook method into UI event

@@ -19,4 +19,5 @@
     <string name="item_1">BreakFast</string>
     <string name="item_2">Lunch</string>
     <string name="item_3">Cart</string>
+    <string name="cartisempty">Cart is empty</string>
 </resources>

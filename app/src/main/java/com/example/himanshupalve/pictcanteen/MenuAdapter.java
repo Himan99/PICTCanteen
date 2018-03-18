@@ -1,6 +1,7 @@
 package com.example.himanshupalve.pictcanteen;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+
+import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
 /**
  * Created by Himanshu Palve on 3/16/2018.
@@ -62,6 +65,15 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuItemViewHo
                 String id = mDataRef.push().getKey();
                 Order order=new Order(Names.get(position),1);
                 mDataRef.child(id).setValue(order);
+                SharedPreferences sharedPreferences=getDefaultSharedPreferences(view.getContext());
+                int cartsize=sharedPreferences.getInt("CartSize",0);
+                int count=sharedPreferences.getInt(Names.get(position),0);
+                count++;
+                cartsize++;
+                SharedPreferences.Editor editor=sharedPreferences.edit();
+                editor.putInt(Names.get(position),count);
+                editor.putInt("CartSize",cartsize);
+                editor.apply();
             }
         });
     }
@@ -82,5 +94,6 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuItemViewHo
         public void bind(int position)  {
             tv.setText(Names.get(position));
         }
+
     }
 }

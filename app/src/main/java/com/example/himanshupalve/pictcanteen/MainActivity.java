@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Intent intent = new Intent(this,LoginActivity.class);
         startActivity(intent);
+        setSharedPreferences();
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.navigation);
 
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                                 selectedFragment = LunchFragment.newInstance("","");
                                 break;
                             case R.id.action_item3:
-                                selectedFragment = CartFragment.newInstance("","");
+                                selectedFragment = CartFragment.newInstance();
                                 break;
                         }
                         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -67,5 +68,27 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
-
+    private void setSharedPreferences()
+    {
+        SharedPreferences sharedPreferences=getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        ArrayList<String> mArrayList=new ArrayList<>();
+        AssetManager assetManager=getAssets();
+        try {
+            InputStream inputStream = assetManager.open("itemsnames.txt");
+            BufferedReader in = new BufferedReader(new InputStreamReader(inputStream));
+            String line = null;
+            while((line = in.readLine()) != null) {
+                String word = line.trim();
+                editor.putInt(word,0);
+                editor.apply();
+                mArrayList.add(word);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(this,"Could not load menu",Toast.LENGTH_LONG).show();
+        }
+        editor.putInt("CartSize",0);
+        editor.apply();
+    }
 }
