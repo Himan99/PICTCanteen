@@ -15,6 +15,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -88,7 +94,26 @@ public class CartFragment extends Fragment {
         mConfirm_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                for(int i=0;i<mAdapter.CART_SIZE;i++)
+                {
+                    DatabaseReference mDataRef;
+                    mDataRef= FirebaseDatabase.getInstance().getReference("Orders").child(mAdapter.Names.get(i));
+//                    mDataRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(DataSnapshot dataSnapshot)
+//                        {
+//                            int quantity=mDataRef.child(mAdapter.Names.get(i)).getValue();
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(DatabaseError databaseError) {
+//
+//                        }
+//                    });
+                    Order order=new Order(mAdapter.Names.get(i),mAdapter.quantity.get(i));
+//                    String id = mDataRef.push().getKey();
+                    mDataRef.setValue(order);
+                }
             }
         });
         return RootView;

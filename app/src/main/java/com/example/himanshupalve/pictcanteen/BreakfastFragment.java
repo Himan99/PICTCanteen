@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -31,7 +32,6 @@ public class BreakfastFragment extends Fragment {
     private final static int NUM_LIST_ITEMS =10;
     private RecyclerView mMenu;
     private MenuAdapter mAdapter;
-    static Context Main;
     LinearLayoutManager layoutManager;
     // TODO: Rename and change types of parameters
 
@@ -43,7 +43,6 @@ public class BreakfastFragment extends Fragment {
     // TODO: Rename and change types and number of parameters
     public static BreakfastFragment newInstance(Context main) {
         BreakfastFragment fragment = new BreakfastFragment();
-        Main=main;
         Bundle args = new Bundle();
         return fragment;
     }
@@ -96,6 +95,10 @@ public class BreakfastFragment extends Fragment {
 //        editor.putInt("CartSize",0);
 //        editor.apply();
         return mArrayList;
+    }
+    private ArrayList<ImageView>getImages()
+    {
+                
     }
     // TODO: Rename method, update argument and hook method into UI event
 

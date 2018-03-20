@@ -6,10 +6,11 @@ package com.example.himanshupalve.pictcanteen;
 
 public class Order {
     String name;
-    String quantity;
+    int quantity;
     public  Order(String Name,int quant)
     {
         name=Name;
-        quantity=String.valueOf(quant);
+//        quantity=String.valueOf(quant);
+        quantity=quant;
     }
 }

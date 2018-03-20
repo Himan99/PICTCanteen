@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,16 +29,21 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuItemViewHo
 {
     private int NumberOfItems;
     final private ArrayList<String> Names;
+    private ArrayList<ImageView> imageViews;
 
-    public MenuAdapter(int numberOfItems,ArrayList<String> names)
+    private Toast toast;
+
+    public MenuAdapter(int numberOfItems, ArrayList<String> names, ArrayList<ImageView> imageArray)
     {
         Names=names;
         NumberOfItems=numberOfItems;
+        imageViews=imageArray;
     }
 
     @Override
     public MenuItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context=parent.getContext();
+        toast=new Toast(parent.getContext());
         int layoutIdForListItem=R.layout.menu_list_item;
         LayoutInflater inflater=LayoutInflater.from(context);
         boolean attachParentImmediately=false;
@@ -52,9 +58,13 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuItemViewHo
         holder.mAddToCart_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(),"Added To Cart",Toast.LENGTH_LONG).show();
-                DatabaseReference mDataRef;
-                mDataRef= FirebaseDatabase.getInstance().getReference("Orders");
+                if(toast!=null)
+                {
+                    toast.cancel();
+                }
+                toast.makeText(view.getContext(),"Added To Cart",Toast.LENGTH_LONG).show();
+//                DatabaseReference mDataRef;
+//                mDataRef= FirebaseDatabase.getInstance().getReference("Orders");
 //                mDataRef.child(Names.get(position)).addListenerForSingleValueEvent(new Va);
 //
 //                    @Override
@@ -62,9 +72,9 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuItemViewHo
 //
 //                    }
 //                });
-                String id = mDataRef.push().getKey();
-                Order order=new Order(Names.get(position),1);
-                mDataRef.child(id).setValue(order);
+//                String id = mDataRef.push().getKey();
+//                Order order=new Order(Names.get(position),1);
+//                mDataRef.child(id).setValue(order);
                 SharedPreferences sharedPreferences=getDefaultSharedPreferences(view.getContext());
                 int cartsize=sharedPreferences.getInt("CartSize",0);
                 int count=sharedPreferences.getInt(Names.get(position),0);

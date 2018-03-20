@@ -19,9 +19,9 @@ import static android.preference.PreferenceManager.getDefaultSharedPreferences;
  */
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartItemViewHolder>{
-    private int CART_SIZE;
-    private ArrayList<String>Names;
-    private ArrayList<Integer> quantity;
+    public int CART_SIZE;
+    public ArrayList<String>Names;
+    public ArrayList<Integer> quantity;
     public CartAdapter(int numberOfItems,ArrayList<String> names,ArrayList<Integer> i)
     {
         quantity=i;
